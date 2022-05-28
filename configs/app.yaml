@@ -1,0 +1,30 @@
+web:
+  port: 8001
+
+log:
+  path: ./logs/
+  format: -%Y%m%d
+  infoFile: demo-info
+  errorFile: demo-error
+
+database:
+  name: default
+  host: 127.0.0.1
+  port: 3306
+  database: go_gin
+  username: root
+  password: Root0!
+  maxIdleConnections: 5
+  maxOpenConnections: 100
+  charset: utf8mb4
+  ssl: false
+  time_zone: Local
+  debug: true
+
+redis:
+  name: default
+  host: 127.0.0.1:6379
+  password:
+  db: 0
+  minIdle: 50
+  poolSize: 1000
