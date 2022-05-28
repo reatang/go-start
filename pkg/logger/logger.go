@@ -39,9 +39,9 @@ func (l *Log) init(config *LogConfig) {
 		return lvl < zapcore.WarnLevel
 	})
 
-	// 获取 info、warn、debug日志文件的io.Writer 抽象 SetLogFile() 在下方实现
-	infoWriter := l.SetLogFile(config.Path + config.InfoFile, config.Format)
-	errorWriter := l.SetLogFile(config.Path + config.InfoFile, config.Format)
+	// 获取 info、warn、debug日志文件的io.Writer 抽象 setLogFile() 在下方实现
+	infoWriter := l.setLogFile(config.Path+config.InfoFile, config.Format)
+	errorWriter := l.setLogFile(config.Path+config.InfoFile, config.Format)
 
 	// 最后创建具体的Logger
 	core := zapcore.NewTee(
@@ -54,10 +54,10 @@ func (l *Log) init(config *LogConfig) {
 	l.l = zap.New(core, zap.AddCaller(), development)
 }
 
-// SetLogFile 设置日志切割方式方式
-func (l *Log) SetLogFile(filename, format string) io.Writer {
+// setLogFile 设置日志切割方式方式
+func (l *Log) setLogFile(filename, format string) io.Writer {
 	hook, err := rotatelogs.New(
-		filename + format + ".log",
+		filename+format+".log",
 		rotatelogs.WithLinkName(filename),
 		rotatelogs.WithMaxAge(time.Hour*24*7),
 		rotatelogs.WithRotationTime(time.Hour*24),
